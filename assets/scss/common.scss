@@ -1,0 +1,38 @@
+@import './loading';
+@import './form/index';
+@import './post-form';
+@import './3rd-party/vue-tippy';
+@import './alert';
+
+body {
+  background-color: #eceff1;
+  font-family: 'Montserrat', sans-serif;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.logotype {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #424242;
+
+  span {
+    font-weight: bold;
+  }
+}
+
+.wh-ratio::before {
+  content: '';
+  padding-top: 100%;
+  float: left;
+}
+.wh-ratio::after {
+  content: '';
+  display: block;
+  clear: both;
+}

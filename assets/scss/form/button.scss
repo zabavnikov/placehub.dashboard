@@ -1,0 +1,9 @@
+.button {
+  @apply font-semibold text-sm text-gray-600 px-4 rounded bg-gray-300;
+  height: 36px;
+}
+
+.button-primary {
+  color: #C5CAE9;
+  background-color: #5C6BC0;
+}

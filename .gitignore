@@ -1,0 +1,17 @@
+/*
+!/assets
+!/components
+!/helpers
+!/layouts
+!/middleware
+!/modules
+!/plugins
+!/routes
+!/static
+!/store
+!/utils
+!.gitignore
+!nuxt.config.js
+!tailwind.config.js
+!package.json
+!yarn.lock
