@@ -2,10 +2,10 @@
   <layout heading="Места">
     <template #toolbar>
       <span class="mr-2">Показать только:</span>
-      <n-link :to="{name: 'geo', query: {type: 'country'}}" class="underline mr-2">страны</n-link>
-      <n-link :to="{name: 'geo', query: {type: 'region'}}" class="underline mr-2">регионы</n-link>
-      <n-link :to="{name: 'geo', query: {type: 'locality'}}" class="underline mr-2">населенные пункты</n-link>
-      <n-link :to="{name: 'geo', query: {type: 'place'}}" class="underline">места</n-link>
+      <n-link :to="{name: 'geo', query: {type: 'countries'}}" class="underline mr-2">страны</n-link>
+      <n-link :to="{name: 'geo', query: {type: 'regions'}}" class="underline mr-2">регионы</n-link>
+      <n-link :to="{name: 'geo', query: {type: 'localities'}}" class="underline mr-2">населенные пункты</n-link>
+      <n-link :to="{name: 'geo', query: {type: 'places'}}" class="underline">места</n-link>
     </template>
     <template #content>
       <table class="table-auto w-full">

@@ -2,7 +2,7 @@
   <layout>
     <template #heading>{{ isEdit ? 'Редактирование места' : 'Добавление места' }}</template>
     <template #sidebar>
-      <div v-if="place.type === 'locality'" class="mb-4">
+      <div v-if="place.type === 'localities'" class="mb-4">
         <div class="mb-4">
           <label for="locality-type-id">Тип населенного пункта</label>
           <select v-model="place.locality_type_id" id="locality-type-id" class="input">
@@ -16,7 +16,7 @@
         </label>
       </div>
 
-      <div v-if="place.type === 'place'" class="mb-4">
+      <div v-if="place.type === 'places'" class="mb-4">
         <label for="place-category-id">Категория места</label>
         <select v-model="place.place_category_id" id="place-category-id" class="input">
           <optgroup v-for="section in sections" :value="section.id" :key="section.id" :label="section.name">
@@ -34,15 +34,15 @@
     <template #content>
       <div class="flex">
         <label for="type-region" class="mr-4">
-          <input type="radio" v-model="place.type" id="type-region" name="type" value="region">
+          <input type="radio" v-model="place.type" id="type-region" name="type" value="regions">
           <span>Регион</span>
         </label>
         <label for="type-locality" class="mr-4">
-          <input type="radio" v-model="place.type" id="type-locality" name="type" value="locality">
+          <input type="radio" v-model="place.type" id="type-locality" name="type" value="localities">
           <span>Населенный пункт</span>
         </label>
         <label for="type-place">
-          <input type="radio" v-model="place.type" id="type-place" name="type" value="place">
+          <input type="radio" v-model="place.type" id="type-place" name="type" value="places">
           <span>Место</span>
         </label>
       </div>
@@ -78,7 +78,7 @@
   import debounce from 'lodash/debounce';
 
   const localityRegionState = {
-    parent_id: 0,
+    parent_id: null,
     contributor_id: 1,
     locality_type_id: null,
     place_category_id: null,
@@ -101,26 +101,26 @@
     watch: {
       'place.type'(type) {
         // reset fields
-        if (type !== 'place') {
+        if (type !== 'places') {
           this.place.place_category_id = null;
         }
 
         // reset fields
-        if (type !== 'locality') {
+        if (type !== 'localities') {
           this.place.locality_type_id = null;
           this.place.is_capital = false;
         }
 
-        if (type === 'region') {
-          this.types = ['country'];
+        if (type === 'places') {
+          this.types = ['regions', 'localities'];
         }
 
-        if (type === 'locality') {
-          this.types = ['region'];
+        if (type === 'localities') {
+          this.types = ['regions'];
         }
 
-        if (type === 'place') {
-          this.types = ['region', 'locality'];
+        if (type === 'regions') {
+          this.types = ['countries'];
         }
       }
     },
