@@ -1,6 +1,5 @@
 <template>
-  <layout>
-    <template #heading>{{ isEdit ? 'Редактирование места' : 'Добавление места' }}</template>
+  <layout :heading="isEdit ? 'Редактирование геообъекта' : 'Создание геообъекта'">
     <template #sidebar>
       <div v-if="place.type === 'localities'" class="mb-4">
         <div class="mb-4">
@@ -48,14 +47,16 @@
       </div>
 
       <div class="mt-4">
-        <input :value="query" @input="onSearch" type="text" class="input" placeholder="Название страны, региона или населенного пункта">
-        <ul v-show="places.length">
-          <li v-for="item in places" :key="item.id" @click="onSelect(item)">{{ item.full_name }}</li>
-        </ul>
+        <label for="name">Название</label>
+        <input type="text" class="input" id="name" v-model="place.name">
       </div>
 
       <div class="mt-4">
-        <input type="text" class="input" v-model="place.name">
+        <label for="parent-id">Родительский геообъект</label>
+        <input :value="query" @input="onSearch" id="parent-id" type="text" class="input" placeholder="Название страны, региона или населенного пункта">
+        <ul v-show="places.length">
+          <li v-for="item in places" :key="item.id" @click="onSelect(item)" class="cursor-pointer hover:font-bold">{{ item.full_name }}</li>
+        </ul>
       </div>
 
       <div class="flex mt-4">
@@ -94,7 +95,11 @@
       return {
         success: false,
         places: [],
-        types: ['country']
+        parentTypes: {
+          regions: ['countries'],
+          localities: ['regions'],
+          places: ['regions', 'localities'],
+        },
       }
     },
 
@@ -110,29 +115,17 @@
           this.place.locality_type_id = null;
           this.place.is_capital = false;
         }
-
-        if (type === 'places') {
-          this.types = ['regions', 'localities'];
-        }
-
-        if (type === 'localities') {
-          this.types = ['regions'];
-        }
-
-        if (type === 'regions') {
-          this.types = ['countries'];
-        }
       }
     },
 
     async asyncData({$axios, params}) {
-      const isEdit = params.geoId > 0;
+      const isEdit = params.mapId > 0;
 
       let placeQuery = '';
 
       if (isEdit) {
         placeQuery = `
-          place(id: ${params.geoId}) {
+          place(id: ${params.mapId}) {
             id
             locality_type_id
             place_category_id
@@ -152,11 +145,11 @@
       }
 
       let gql = `{
-        geoLocalityTypes {
+        mapLocalityTypes {
           id
           name
         }
-        geoPlaceCategories {
+        mapPlaceCategories {
           id
           parent_id
           name
@@ -168,8 +161,8 @@
 
       const sections = {}, categories = [];
 
-      if (data.geoPlaceCategories) {
-        data.geoPlaceCategories.forEach(category => {
+      if (data.mapPlaceCategories) {
+        data.mapPlaceCategories.forEach(category => {
           if (category.parent_id === null) {
             sections[category.id] = {...category};
           } else {
@@ -188,7 +181,7 @@
 
       return {
         isEdit,
-        localityTypes: data.geoLocalityTypes,
+        localityTypes: data.mapLocalityTypes,
         sections,
         place: data.place || {...localityRegionState},
         query: data.place && data.place.parent_names || '',
@@ -203,7 +196,7 @@
 
         const options = {
           method: this.isEdit ? 'put' : 'post',
-          url: `/api/geo${this.isEdit ? `/${this.place.id}` : ''}`,
+          url: `/api/map${this.isEdit ? `/${this.place.id}` : ''}`,
           data: this.place,
         };
 
@@ -212,7 +205,7 @@
             if (this.isEdit) {
               this.$toast.success('Данные успешно изменены');
             } else {
-              this.$router.push({name: 'geo.edit', params: { geoId: data.id }});
+              this.$router.push({name: 'map.edit', params: { mapId: data.id }});
             }
           });
       },
@@ -235,9 +228,9 @@
         }
 
         this.$axios
-          .$post('/api/geo/search', {
+          .$post('/api/map/search', {
             query,
-            types: this.types,
+            types: this.parentTypes[this.place.type],
           })
           .then(response => {
             this.places = response;

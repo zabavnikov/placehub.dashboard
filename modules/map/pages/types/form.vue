@@ -23,7 +23,7 @@
 
       if (isEdit) {
         gql = `{
-          geoLocalityType(id: ${params.typeId}) {
+          mapLocalityType(id: ${params.typeId}) {
             id
             name
           }
@@ -31,7 +31,7 @@
 
         const { data } = await $axios.$post('/gql', {query: gql});
 
-        type = data.geoLocalityType || formInitialState;
+        type = data.mapLocalityType || formInitialState;
       }
 
       return {
@@ -49,7 +49,7 @@
         };
 
         this.$axios(options)
-          .then(() => this.$router.push('/geo/types'));
+          .then(() => this.$router.push('/map/types'));
       },
     },
   }

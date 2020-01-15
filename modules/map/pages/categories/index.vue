@@ -16,7 +16,7 @@
           <td :class="{'border px-4 py-2': true, 'font-bold': !category.parent_id}">{{ category.name }}</td>
           <td class="border px-4 py-2"><b>{{ category.parent_id ? category.parent.name : '-' }}</b></td>
           <td class="border px-4 py-2">
-            <n-link :to="{name: 'geo.placeCategories.edit', params: {categoryId: category.id}}" title="Редактировать">
+            <n-link :to="{name: 'map.placeCategories.edit', params: {categoryId: category.id}}" title="Редактировать">
               <i class="fa fa-pencil"></i>
             </n-link>
           </td>
@@ -33,7 +33,7 @@
       const isEdit = params.categoryId > 0;
 
       let gql = `{
-        geoPlaceCategories {
+        mapPlaceCategories {
           id
           parent_id
           name
@@ -45,7 +45,7 @@
 
       return {
         isEdit,
-        categories: data.geoPlaceCategories,
+        categories: data.mapPlaceCategories,
       }
     }
   }

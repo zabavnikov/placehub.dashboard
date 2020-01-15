@@ -55,7 +55,7 @@
 
       if (isEdit) {
         categoryQuery = `
-          geoPlaceCategory(id: ${params.categoryId}) {
+          mapPlaceCategory(id: ${params.categoryId}) {
             id
             parent_id
             name
@@ -64,7 +64,7 @@
       }
 
       let gql = `{
-        geoPlaceCategories(onlyParents: true) {
+        mapPlaceCategories(onlyParents: true) {
           id
           name
         }
@@ -75,8 +75,8 @@
 
       return {
         isEdit,
-        categories: data.geoPlaceCategories,
-        category: data.geoPlaceCategory || formInitialState,
+        categories: data.mapPlaceCategories,
+        category: data.mapPlaceCategory || formInitialState,
       }
     },
 
@@ -96,7 +96,7 @@
                 position: 'is-top',
               })
             } else {
-              this.$router.push({name: 'geo.placeCategories.edit', params: { categoryId: data.id }});
+              this.$router.push({name: 'map.placeCategories.edit', params: { categoryId: data.id }});
             }
           });
       },

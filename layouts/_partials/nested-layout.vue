@@ -16,11 +16,11 @@
             <slot name="toolbar"></slot>
           </div>
         </div>
-        <div class="flex p-6">
-          <div class="w-3/5">
+        <div :class="{'p-6': true, 'flex': hasSidebarSlot}">
+          <div :class="{'w-3/5': hasSidebarSlot}">
             <slot name="content"></slot>
           </div>
-          <div class="w-2/5 ml-4">
+          <div v-show="hasSidebarSlot" class="w-2/5 ml-4">
             <slot name="sidebar"></slot>
           </div>
         </div>

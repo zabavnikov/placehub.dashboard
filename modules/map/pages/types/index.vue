@@ -14,7 +14,7 @@
           <td class="border px-4 py-2">{{ type.id }} </td>
           <td class="border px-4 py-2">{{ type.name }}</td>
           <td class="border px-4 py-2">
-            <n-link :to="{name: 'geo.localityTypes.edit', params: {typeId: type.id}}" title="Редактировать">
+            <n-link :to="{name: 'map.localityTypes.edit', params: {typeId: type.id}}" title="Редактировать">
               <i class="fa fa-pencil"></i>
             </n-link>
           </td>
@@ -29,7 +29,7 @@
   export default {
     async asyncData({ $axios, params }) {
       let gql = `{
-        geoLocalityTypes {
+        mapLocalityTypes {
           id
           name
         }
@@ -38,7 +38,7 @@
       const { data } = await $axios.$post('/gql', {query: gql});
 
       return {
-        types: data.geoLocalityTypes,
+        types: data.mapLocalityTypes,
       }
     }
   }

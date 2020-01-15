@@ -1,5 +1,5 @@
 export default () => ({
-  geo: [],
+  map: [],
   editablePlace: {},
   categories: [],
 })

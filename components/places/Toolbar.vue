@@ -11,9 +11,9 @@
     computed: {
       menu() {
         return [
-          {name: 'Создать место', href: '/geo/create'},
-          {name: 'Создать категорию', href: '/geo/categories/create'},
-          {name: 'Создать тип населенного пункта', href: '/geo/types/create'},
+          {name: 'Создать место', href: '/map/create'},
+          {name: 'Создать категорию', href: '/map/categories/create'},
+          {name: 'Создать тип населенного пункта', href: '/map/types/create'},
         ]
       }
     }

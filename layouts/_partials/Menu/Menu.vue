@@ -16,10 +16,10 @@
 </template>
 
 <script>
-  import geo from './geo';
+  import map from './map';
 
   const menu = {
-    geo,
+    map,
   };
 
   export default {

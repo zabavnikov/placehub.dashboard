@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import users from './users';
-import geo from './geo';
+import map from './map';
 
 // Homepage
 import Homepage from '../modules/index';
@@ -18,7 +18,7 @@ export function createRouter(ssrContext, createDefaultRouter) {
     routes: [
       {path: '/', name: 'homepage', component: Homepage},
       ...users,
-      ...geo,
+      ...map,
     ]
   })
 }

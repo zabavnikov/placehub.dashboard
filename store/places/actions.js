@@ -1,7 +1,7 @@
 export default {
   async fetchItems({ commit }) {
     const query = `
-      geo(count: 25) {
+      map(count: 25) {
         data {
           id
           name
@@ -9,11 +9,11 @@ export default {
       }
     `;
 
-    const geo = await this.$axios.$post('/', {query});
+    const map = await this.$axios.$post('/', {query});
 
-    console.log(geo);
+    console.log(map);
 
-    commit('setItems', geo.data);
+    commit('setItems', map.data);
     // commit('setCategories', categories.data);
   }
 }
