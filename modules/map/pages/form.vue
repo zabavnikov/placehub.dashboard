@@ -84,6 +84,7 @@
     locality_type_id: null,
     place_category_id: null,
     name: '',
+    description: '',
     lat: 0,
     lng: 0,
     is_capital: false,
