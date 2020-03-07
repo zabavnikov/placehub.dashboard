@@ -122,48 +122,12 @@
     async asyncData({$axios, params}) {
       const isEdit = params.mapId > 0;
 
-      let placeQuery = '';
-
-      if (isEdit) {
-        placeQuery = `
-          place(id: ${params.mapId}) {
-            id
-            locality_type_id
-            place_category_id
-            parent_id
-            contributor_id
-            name
-            type
-            full_name
-            parent_names
-            description
-            lat
-            lng
-            is_capital
-            parents
-          }
-        `;
-      }
-
-      let gql = `{
-        mapLocalityTypes {
-          id
-          name
-        }
-        mapPlaceCategories {
-          id
-          parent_id
-          name
-        }
-        ${placeQuery}
-      }`;
-
-      const { data } = await $axios.$post('/gql', {query: gql});
+      const { map, places_categories, localities_types } = await $axios.$post(`/api/map/form/${params.mapId ? params.mapId : ''}`);
 
       const sections = {}, categories = [];
 
-      if (data.mapPlaceCategories) {
-        data.mapPlaceCategories.forEach(category => {
+      if (places_categories) {
+        places_categories.forEach(category => {
           if (category.parent_id === null) {
             sections[category.id] = {...category};
           } else {
@@ -182,10 +146,10 @@
 
       return {
         isEdit,
-        localityTypes: data.mapLocalityTypes,
+        localityTypes: localities_types,
         sections,
-        place: data.place || {...localityRegionState},
-        query: data.place && data.place.parent_names || '',
+        place: map || {...localityRegionState},
+        query: map && map.parent_names || '',
       }
     },
 
