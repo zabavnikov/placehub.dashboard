@@ -27,9 +27,9 @@
             <td class="border px-4 py-2">
               <n-link :to="{name: 'map', query: {type: place.type}}">{{ place.type }}</n-link>
             </td>
-            <td class="border px-4 py-2">
+            <!--<td class="border px-4 py-2">
               <n-link :to="{name: 'map', query: {parentId: place.parent_id}}">{{ place.parent_names }}</n-link>
-            </td>
+            </td>-->
             <td class="border px-4 py-2">
               <n-link :to="{name: 'map.edit', params: {mapId: place.id}}" title="Редактировать">
                 <i class="fa fa-pencil"></i>
@@ -44,39 +44,17 @@
 
 <script>
   export default {
-    watchQuery: ['page', 'type', 'parentId'],
-
-    async asyncData({ $axios, query }) {
-      const { data } = await $axios.$post('/gql', {query: `{
-        placesPaginate(
-          orderBy: "id",
-          limit: 200,
-          page: ${query.page || 1}
-          ${query.type ? `, type: "${query.type}"`: ''}
-          ${query.parentId ? `, parentId: ${query.parentId}`: ''}
-        ) {
-          data {
-            id
-            type
-            parent_id
-            place_category_id
-            name
-            lat
-            lng
-            parent_names
+    asyncData({ $axios, query }) {
+      return $axios
+        .$get('/api/map', {
+          params: {
+            limit: 255,
+            paginate: true,
           }
-          current_page
-          total
-        }
-      }`});
-
-      return {
-        places: data.placesPaginate,
-        pagination: {
-          current_page: data.placesPaginate.current_page,
-          total: data.placesPaginate.total,
-        }
-      }
+        })
+        .then(places => {
+          return {places}
+        });
     }
   }
 </script>
