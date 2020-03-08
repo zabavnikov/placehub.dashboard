@@ -15,7 +15,7 @@ export default [
   {path: '/map/categories/create', name: 'map.placeCategories.create', component: GeoCategoriesForm},
   {path: '/map/categories/:categoryId/edit', name: 'map.placeCategories.edit', component: GeoCategoriesForm},
 
-  {path: '/map/types', name: 'map.localityTypes', component: GeoTypes},
-  {path: '/map/types/create', name: 'map.localityTypes.create', component: GeoTypesForm},
-  {path: '/map/types/:typeId/edit', name: 'map.localityTypes.edit', component: GeoTypesForm},
+  {path: '/map/locality-types', name: 'map.localityTypes', component: GeoTypes},
+  {path: '/map/locality-types/create', name: 'map.localityTypes.create', component: GeoTypesForm},
+  {path: '/map/locality-types/:typeId/edit', name: 'map.localityTypes.edit', component: GeoTypesForm},
 ]

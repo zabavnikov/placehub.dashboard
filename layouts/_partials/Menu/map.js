@@ -2,9 +2,9 @@ export default [
   {name: 'Создать геообъект', href: '/map/create'},
   {
     name: 'Типы населенных пунктов',
-    href: '/map/types',
+    href: '/map/locality-types',
     menu: [
-      {name: 'Создать тип', href: '/map/types/create'}
+      {name: 'Создать тип', href: '/map/locality-types/create'}
     ]
   },
   {

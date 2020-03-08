@@ -18,20 +18,11 @@
   export default {
     async asyncData({$axios, params}) {
       const isEdit = params.typeId > 0;
+      let type = formInitialState;
 
-      let gql = '', type = formInitialState;
 
       if (isEdit) {
-        gql = `{
-          mapLocalityType(id: ${params.typeId}) {
-            id
-            name
-          }
-        }`;
-
-        const { data } = await $axios.$post('/gql', {query: gql});
-
-        type = data.mapLocalityType || formInitialState;
+        type = await $axios.$get('/api/map/locality-types/form/' + params.typeId);
       }
 
       return {
@@ -44,12 +35,12 @@
       onSubmit() {
         const options = {
           method: this.isEdit ? 'put' : 'post',
-          url: process.env.API_GEO + `/types${this.isEdit ? `/${this.type.id}` : ''}`,
+          url: `/api/map/locality-types${this.isEdit ? `/${this.type.id}` : ''}`,
           data: this.type,
         };
 
         this.$axios(options)
-          .then(() => this.$router.push('/map/types'));
+          .then(() => this.$router.push({name: 'map.localityTypes'}));
       },
     },
   }

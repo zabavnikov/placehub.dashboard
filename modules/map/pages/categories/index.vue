@@ -29,23 +29,11 @@
 
 <script>
   export default {
-    async asyncData({ $axios, params }) {
-      const isEdit = params.categoryId > 0;
-
-      let gql = `{
-        mapPlaceCategories {
-          id
-          parent_id
-          name
-          parent {id name}
-        }
-      }`;
-
-      const { data } = await $axios.$post('/gql', {query: gql});
+    async asyncData({ $axios }) {
+      const categories = await $axios.$get('/api/map/places/categories');
 
       return {
-        isEdit,
-        categories: data.mapPlaceCategories,
+        categories
       }
     }
   }

@@ -27,18 +27,11 @@
 
 <script>
   export default {
-    async asyncData({ $axios, params }) {
-      let gql = `{
-        mapLocalityTypes {
-          id
-          name
-        }
-      }`;
-
-      const { data } = await $axios.$post('/gql', {query: gql});
+    async asyncData({ $axios }) {
+      const types = await $axios.$get('/api/map/locality-types');
 
       return {
-        types: data.mapLocalityTypes,
+        types
       }
     }
   }
