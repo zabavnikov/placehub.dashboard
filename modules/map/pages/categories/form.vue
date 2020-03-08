@@ -5,7 +5,7 @@
       <div>
         <select v-model="category.parent_id" class="input">
           <option :value="null">Без родительской категории</option>
-          <option :selected="category.parent_id === category.id" v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+          <option :selected="category.parent_id === category.id" v-for="category in parents" :key="category.id" :value="category.id">{{ category.name }}</option>
         </select>
       </div>
 
@@ -36,7 +36,7 @@
     watch: {
       'category.parent_id': {
         handler(value) {
-          this.categories.forEach(cat => {
+          this.parents.forEach(cat => {
             if (value === cat.id) {
               this.selected = cat.name;
             } else {
@@ -50,33 +50,12 @@
 
     async asyncData({$axios, params}) {
       const isEdit = params.categoryId > 0;
-
-      let categoryQuery = '';
-
-      if (isEdit) {
-        categoryQuery = `
-          mapPlaceCategory(id: ${params.categoryId}) {
-            id
-            parent_id
-            name
-          }
-        `;
-      }
-
-      let gql = `{
-        mapPlaceCategories(onlyParents: true) {
-          id
-          name
-        }
-        ${categoryQuery}
-      }`;
-
-      const { data } = await $axios.$post('/gql', {query: gql});
+      const { parents, category } = await $axios.$get(`/api/map/places/categories/form${isEdit ? `/${params.categoryId}` : ''}`);
 
       return {
         isEdit,
-        categories: data.mapPlaceCategories,
-        category: data.mapPlaceCategory || formInitialState,
+        parents,
+        category: category || formInitialState,
       }
     },
 
@@ -84,7 +63,7 @@
       onSubmit() {
         const options = {
           method: this.isEdit ? 'put' : 'post',
-          url: process.env.API_GEO + `/categories${this.isEdit ? `/${this.category.id}` : ''}`,
+          url: `/api/map/places/categories${this.isEdit ? `/${this.category.id}` : ''}`,
           data: this.category,
         };
 
