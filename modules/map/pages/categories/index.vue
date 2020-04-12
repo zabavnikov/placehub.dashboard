@@ -30,7 +30,7 @@
 <script>
   export default {
     async asyncData({ $axios }) {
-      const categories = await $axios.$get('/api/map/places/categories');
+      const categories = await $axios.$get('/api/geo/places/categories');
 
       return {
         categories

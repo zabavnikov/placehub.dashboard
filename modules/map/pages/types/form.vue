@@ -22,7 +22,7 @@
 
 
       if (isEdit) {
-        type = await $axios.$get('/api/map/locality-types/form/' + params.typeId);
+        type = await $axios.$get('/api/geo/locality-types/form/' + params.typeId);
       }
 
       return {
@@ -35,7 +35,7 @@
       onSubmit() {
         const options = {
           method: this.isEdit ? 'put' : 'post',
-          url: `/api/map/locality-types${this.isEdit ? `/${this.type.id}` : ''}`,
+          url: `/api/geo/locality-types${this.isEdit ? `/${this.type.id}` : ''}`,
           data: this.type,
         };
 
