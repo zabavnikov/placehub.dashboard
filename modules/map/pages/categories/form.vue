@@ -50,7 +50,7 @@
 
     async asyncData({$axios, params}) {
       const isEdit = params.categoryId > 0;
-      const { parents, category } = await $axios.$get(`/api/geo/places/categories/form${isEdit ? `/${params.categoryId}` : ''}`);
+      const { parents, category } = await $axios.$get(`/api/places/places/categories/form${isEdit ? `/${params.categoryId}` : ''}`);
 
       return {
         isEdit,
@@ -63,7 +63,7 @@
       onSubmit() {
         const options = {
           method: this.isEdit ? 'put' : 'post',
-          url: `/api/geo/places/categories${this.isEdit ? `/${this.category.id}` : ''}`,
+          url: `/api/places/places/categories${this.isEdit ? `/${this.category.id}` : ''}`,
           data: this.category,
         };
 

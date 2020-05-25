@@ -46,7 +46,7 @@
   export default {
     asyncData({ $axios, query }) {
       return $axios
-        .$get('/api/geo', {
+        .$get('/api/places', {
           params: {
             limit: 255,
             paginate: true,

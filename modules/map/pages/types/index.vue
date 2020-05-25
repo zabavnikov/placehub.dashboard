@@ -28,7 +28,7 @@
 <script>
   export default {
     async asyncData({ $axios }) {
-      const types = await $axios.$get('/api/geo/locality-types');
+      const types = await $axios.$get('/api/places/locality-types');
 
       return {
         types

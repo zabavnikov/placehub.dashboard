@@ -63,6 +63,6 @@ module.exports = {
 
   env: {
     API_USERS: '/api/users',
-    API_GEO: '/api/geo',
+    API_GEO: '/api/places',
   },
 };

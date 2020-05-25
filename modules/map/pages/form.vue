@@ -122,7 +122,7 @@
     async asyncData({$axios, params}) {
       const isEdit = params.mapId > 0;
 
-      const { map, places_categories, localities_types } = await $axios.$post(`/api/geo/form/${params.mapId ? params.mapId : ''}`);
+      const { map, places_categories, localities_types } = await $axios.$post(`/api/places/form/${params.mapId ? params.mapId : ''}`);
 
       const sections = {}, categories = [];
 
@@ -193,7 +193,7 @@
         }
 
         this.$axios
-          .$post('/api/geo/search', {
+          .$post('/api/places/search', {
             query,
             types: this.parentTypes[this.place.type],
           })
