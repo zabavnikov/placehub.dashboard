@@ -16,10 +16,10 @@
 </template>
 
 <script>
-  import map from './map';
+  import places from './places';
 
   const menu = {
-    map,
+    places,
   };
 
   export default {

@@ -1,9 +1,9 @@
 require('dotenv').config();
+const routes = require('./routes');
 
 module.exports = {
   server: {
     port: 4000,
-    host: '127.0.0.1',
   },
 
   head: {
@@ -21,11 +21,9 @@ module.exports = {
   },
 
   modules: [
-    'nuxt-leaflet',
     '@nuxtjs/axios',
-    '@nuxtjs/auth',
+    '@nuxtjs/auth-next',
     '@nuxtjs/toast',
-    ['@nuxtjs/router', {keepDefaultRouter: true, fileName: './routes'}],
   ],
 
 
@@ -64,5 +62,11 @@ module.exports = {
   env: {
     API_USERS: '/api/users',
     API_GEO: '/api/places',
+  },
+
+  router: {
+    extendRoutes(nuxtRoutes, resolve) {
+      routes(__dirname, nuxtRoutes, resolve);
+    }
   },
 };

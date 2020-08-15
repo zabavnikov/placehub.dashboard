@@ -1,5 +1,5 @@
 <template>
-  <layout>
+  <v-layout>
     <template #heading>Вход через социальные сети</template>
     <template #content>
       <div class="p-6">
@@ -12,7 +12,7 @@
         </div>
       </div>
     </template>
-  </layout>
+  </v-layout>
 </template>
 
 <script>

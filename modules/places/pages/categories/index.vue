@@ -1,5 +1,5 @@
 <template>
-  <layout heading="Категории мест">
+  <v-layout heading="Категории мест">
     <template #content>
       <table class="table-auto w-full">
         <thead>
@@ -24,7 +24,7 @@
         </tbody>
       </table>
     </template>
-  </layout>
+  </v-layout>
 </template>
 
 <script>

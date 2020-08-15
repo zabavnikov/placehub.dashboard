@@ -1,5 +1,5 @@
 <template>
-  <layout :heading="isEdit ? 'Редактирование геообъекта' : 'Создание геообъекта'">
+  <v-layout :heading="isEdit ? 'Редактирование геообъекта' : 'Создание геообъекта'">
     <template #sidebar>
       <div v-if="place.type === 'localities'" class="mb-4">
         <div class="mb-4">
@@ -72,7 +72,7 @@
         <button @click="onSubmit" class="button button-primary">Сохранить</button>
       </div>
     </template>
-  </layout>
+  </v-layout>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <layout>
+  <v-layout>
     <template #content>
       <div class="form-field" :class="{'is-invalid': errors.has('email')}">
         <label for="email">Электронная почта <span class="text-error">*</span></label>
@@ -22,7 +22,7 @@
         <button type="button" class="button button--success" @click="onSubmit">Войти в профиль</button>
       </div>
     </template>
-  </layout>
+  </v-layout>
 </template>
 
 <script>

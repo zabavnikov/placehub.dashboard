@@ -1,5 +1,5 @@
 <template>
-  <layout heading="Места">
+  <v-layout heading="Места">
     <template #subtitle>{{ isEdit ? 'Редактирование категории' : 'Создание категории' }}</template>
     <template #content>
       <div>
@@ -17,7 +17,7 @@
         <button @click="onSubmit" class="button button-primary">Сохранить</button>
       </div>
     </template>
-  </layout>
+  </v-layout>
 </template>
 
 <script>

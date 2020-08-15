@@ -1,24 +1,19 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+const users = require('./users');
+const places = require('./places');
+const reviews = require('./reviews');
 
-import users from './users';
-import map from './map';
+const routes = [
+  ...users,
+  ...places,
+  ...reviews,
+];
 
-// Homepage
-import Homepage from '../modules/index';
-
-Vue.use(Router);
-
-export function createRouter(ssrContext, createDefaultRouter) {
-  const defaultRouter = createDefaultRouter(ssrContext);
-
-  return new Router({
-    ...defaultRouter.options,
-
-    routes: [
-      {path: '/', name: 'homepage', component: Homepage},
-      ...users,
-      ...map,
-    ]
-  })
-}
+module.exports = (dir, nuxtRoutes, resolve) => {
+  routes.forEach(route => {
+    nuxtRoutes.push({
+      ...route,
+      component: resolve(dir, 'modules/' + route.component),
+      chunkName: route.name.replace('.', '_'),
+    })
+  });
+};

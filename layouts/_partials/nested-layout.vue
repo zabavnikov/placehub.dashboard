@@ -1,10 +1,10 @@
 <template>
   <div>
-    <layout-header></layout-header>
+    <v-layout-header></v-layout-header>
 
     <div class="flex min-h-screen">
       <div class="bg-indigo-200 w-1/5">
-        <layout-menu></layout-menu>
+        <v-layout-menu></v-layout-menu>
       </div>
 
       <div class="bg-indigo-100 w-4/5">
@@ -31,8 +31,8 @@
 
 <script>
   import Navigation from './navigation'
-  import LayoutHeader from './Header'
-  import LayoutMenu from './Menu';
+  import VLayoutHeader from './Header'
+  import VLayoutMenu from './Menu';
 
   export default {
     props: {
@@ -43,8 +43,8 @@
     },
 
     components: {
-      LayoutHeader,
-      LayoutMenu,
+      VLayoutHeader,
+      VLayoutMenu,
       Navigation,
     },
 

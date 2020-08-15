@@ -1,5 +1,5 @@
 <template>
-  <layout>
+  <v-layout>
     <template slot="title">Пользователи</template>
     <div slot="content">
       <table class="w-full">
@@ -21,7 +21,7 @@
         </tbody>
       </table>
     </div>
-  </layout>
+  </v-layout>
 </template>
 
 <script>

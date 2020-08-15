@@ -1,11 +1,11 @@
 <template>
-  <layout heading="Места">
+  <v-layout heading="Места">
     <template #toolbar>
       <span class="mr-2">Показать только:</span>
-      <n-link :to="{name: 'map', query: {type: 'countries'}}" class="underline mr-2">страны</n-link>
-      <n-link :to="{name: 'map', query: {type: 'regions'}}" class="underline mr-2">регионы</n-link>
-      <n-link :to="{name: 'map', query: {type: 'localities'}}" class="underline mr-2">населенные пункты</n-link>
-      <n-link :to="{name: 'map', query: {type: 'places'}}" class="underline">места</n-link>
+      <n-link :to="{name: 'places', query: {type: 'countries'}}" class="underline mr-2">страны</n-link>
+      <n-link :to="{name: 'places', query: {type: 'regions'}}" class="underline mr-2">регионы</n-link>
+      <n-link :to="{name: 'places', query: {type: 'localities'}}" class="underline mr-2">населенные пункты</n-link>
+      <n-link :to="{name: 'places', query: {type: 'places'}}" class="underline">места</n-link>
     </template>
     <template #content>
       <table class="table-auto w-full">
@@ -22,13 +22,13 @@
           <tr v-for="place in places.data" :key="place.id">
             <td class="border px-4 py-2">{{ place.id }} </td>
             <td class="border px-4 py-2">
-              <n-link :to="{name: 'map', query: {parentId: place.id}}">{{ place.name }}</n-link>
+              <n-link :to="{name: 'places', query: {parentId: place.id}}">{{ place.name }}</n-link>
             </td>
             <td class="border px-4 py-2">
-              <n-link :to="{name: 'map', query: {type: place.type}}">{{ place.type }}</n-link>
+              <n-link :to="{name: 'places', query: {type: place.type}}">{{ place.type }}</n-link>
             </td>
             <!--<td class="border px-4 py-2">
-              <n-link :to="{name: 'map', query: {parentId: place.parent_id}}">{{ place.parent_names }}</n-link>
+              <n-link :to="{name: 'places', query: {parentId: place.parent_id}}">{{ place.parent_names }}</n-link>
             </td>-->
             <td class="border px-4 py-2">
               <n-link :to="{name: 'map.edit', params: {mapId: place.id}}" title="Редактировать">
@@ -39,7 +39,7 @@
         </tbody>
       </table>
     </template>
-  </layout>
+  </v-layout>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <layout :heading="isEdit ? 'Редактирование типа населенного пункта' : 'Создание типа населенного пункта'">
+  <v-layout :heading="isEdit ? 'Редактирование типа населенного пункта' : 'Создание типа населенного пункта'">
     <template #content>
       <input v-model="type.name" class="input" type="text">
 
@@ -7,7 +7,7 @@
         <button @click="onSubmit" class="button">Сохранить</button>
       </div>
     </template>
-  </layout>
+  </v-layout>
 </template>
 
 <script>
