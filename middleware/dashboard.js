@@ -1,13 +1,13 @@
-export default function({ store, error, redirect, route }) {
+export default function({ auth, error, redirect, route }) {
   /*
     Гостя пропускам только на /login
    */
   if (route.path !== '/login') {
-    if (! store.state.auth.loggedIn) {
+    if (! auth.loggedIn) {
       return redirect('/login');
     }
 
-    if (store.state.auth.user.id !== 1) {
+    if (auth.user.role !== 'administrator') {
       error(403);
     }
   }
